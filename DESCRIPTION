@@ -1,0 +1,23 @@
+Package: mira
+Type: Package
+Title: MIcroarray ReAnalysis
+Version: 0.1.0
+Author: Alexander Betz
+Maintainer: The package maintainer <alexander.betz@gmail.com>
+Description: More about what it does (maybe more than one line)
+    Use four spaces when indenting paragraphs within the Description.
+License: GPL v3.0
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    ArrayExpress,
+    GEOquery,
+    Rbowtie,
+    Biostrings,
+    tibble,
+    dplyr,
+    limma,
+    biomaRt,
+    topGO,
+    ggplot2
+RoxygenNote: 6.1.1

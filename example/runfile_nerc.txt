@@ -1,0 +1,7 @@
+#Job definition file:wq
+#database [GEO,AE] #gene expresssion omnibus or array express
+#eid experiment id e.g. GSE80461 or E-MTAB-3331
+#platformFile containing probe sequences
+database	species	eid	platformID	platformFile	probeIdColName	probeSeqColName	channelCount	cDNAFile	contrastString	pvalDE	lfcDE	pvalGSE
+GEO	drerio	GSE41333	GPL14688	-	NAME	SEQUENCE	2	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	simple	0.05	1.5	0.01
+custom	celegans	nerc	-	./output/platforms/celegans_G2519F-020186.txt	ProbeID	Sequence	1	./genomicDB/Caenorhabditis_elegans.WBcel235.cdna.all.fa	PVP12-control,PVP52-control,MUA12-control,AUT12-control,Unf38-control,PVP12-AgNO3,PVP52-AgNO3,MUA12-AgNO3,AUT12-AgNO3,Unf38-AgNO3	0.05	1.5	0.01	

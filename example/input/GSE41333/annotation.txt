@@ -1,0 +1,7 @@
+Name_Cy3	Name_Cy5	GEO_id	Time	Group	Filename	Replicate	Channel
+Drerio_48h_PAMAMG3_control_rep1	Drerio_48h_PAMAMG3_rep1	GSM1018121	48h	G3	GSM1018121_G3-rep1.txt	1	Cy3
+Drerio_48h_PAMAMG3_control_rep2	Drerio_48h_PAMAMG3_rep2	GSM1018122	48h	G3	GSM1018122_G3-rep2.txt	2	Cy3
+Drerio_48h_PAMAMG3_control_rep3	Drerio_48h_PAMAMG3_rep3	GSM1018123	48h	G3	GSM1018123_G3-rep3.txt	3	Cy3
+Drerio_48h_PAMAMG4_control_rep1	Drerio_48h_PAMAMG4_rep1	GSM1018124	48h	G4	GSM1018124_G4-rep1.txt	1	Cy3
+Drerio_48h_PAMAMG4_control_rep2	Drerio_48h_PAMAMG4_rep2	GSM1018125	48h	G4	GSM1018125_G4-rep2.txt	2	Cy3
+Drerio_48h_PAMAMG4_control_rep3	Drerio_48h_PAMAMG4_rep3	GSM1018126	48h	G4	GSM1018126_G4-rep3.txt	3	Cy3

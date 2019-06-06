@@ -1,0 +1,7 @@
+#Job definition file
+#database [GEO,AE] #gene expresssion omnibus or array express
+#eid experiment id e.g. GSE80461 or E-MTAB-3331
+#platformFile containing probe sequences
+database	species	eid	platformID	platformFile	probeIdColName	probeSeqColName	channelCount	cDNAFile	contrastString	pvalDE	lfcDE	pvalGSE
+GEO	drerio	GSE41333	GPL14688	-	NAME	SEQUENCE	2	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	simple	0.05	1.5	0.01
+#GEO	creinhradtii	GSE48677	GPL13913	./output/platforms/GPL13913_family.soft	ID	SEQUENCE	1	./genomicDB/Creinhardtii_281_v5.5.cds.fa	-	0.05	1.5	0.01

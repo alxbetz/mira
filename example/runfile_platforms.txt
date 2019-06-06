@@ -1,0 +1,22 @@
+#Job definition file
+#database [GEO,AE] #gene expresssion omnibus or array express
+#eid experiment id e.g. GSE80461 or E-MTAB-3331
+#platformFile containing probe sequences
+database	species	eid	platformID	platformFile	probeIdColName	probeSeqColName	channelCount	cDNAFile	contrastString	pvalDE	lfcDE	pvalGSE
+GEO	athaliana	GSE80461	GPL198	./output/platforms/ATH1-121501.probe_tab	Probe Set Name	Probe Sequence	1	./genomicDB/Arabidopsis_thaliana.TAIR10.cdna.all.fa	TiO2_leaves-control_leaves_TiO2,TiO2_roots-control_roots_TiO2,CeO2_leaves-control_leaves_CeO2,CeO2_roots-control_roots_CeO2	0.05	1.5	0.05
+GEO	athaliana	GSE46958	GPL198	./output/platforms/ATH1-121501.probe_tab	Probe Set Name	Probe Sequence	1	./genomicDB/Arabidopsis_thaliana.TAIR10.cdna.all.fa	gold-control	0.05	1.5	0.05
+AE	athaliana	E-MEXP-3950	GPL17416	./output/platforms/AraGene-1_0-st-v1.tair10.probe.tab	Probe ID	probe sequence	1	./genomicDB/Arabidopsis_thaliana.TAIR10.cdna.all.fa	AgNO3-control,AgNp-control	0.05	1.5	0.05
+AE	athaliana	E-MTAB-3331	-	./output/platforms/Agilent_arabidopsis%20v4SequenceList-021169_D_SequenceList_20170524.txt	ProbeID	Sequence	2	./genomicDB/Arabidopsis_thaliana.TAIR10.cdna.all.fa	simple	0.05	1.5	0.05
+GEO	celegans	GSE32521	GPL200	./output/platforms/Celegans.probe_tab	Probe Set Name	Probe Sequence	1	./genomicDB/Caenorhabditis_elegans.WBcel235.cdna.all.fa	AuNp-control	0.05	1.5	0.05
+GEO	celegans	GSE59470	GPL18958	./output/platforms/Celegeans V2 SequenceList\020186_D_SequenceList_20170620.txt	ProbeID	Sequence	2	./genomicDB/Caenorhabditis_elegans.WBcel235.cdna.all.fa	simple	0.05	1.5	0.05
+GEO	celegans	GSE70509	GPL200	./output/platforms/Celegans.probe_tab	Probe Set Name	Probe Sequence	1	./genomicDB/Caenorhabditis_elegans.WBcel235.cdna.all.fa	priAgNp-control,agedAgNp-control,AgNO3-control	0.05	1.5	0.05
+GEO	drerio	GSE30275	GPL13784	./output/platforms/GPL13784_071105_Zv7_EXPR.ndf	PROBE_DESIGN_ID	PROBE_SEQUENCE	1	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	simple	0.05	1.5	0.05
+GEO	drerio	GSE73427	GPL16933	./output/platforms/ZebGene-1_0-st-v1.zv9.probe.tab	Probe ID	probe sequence	1	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	siNP-control,baP-control,siNP_baP-control	0.05	1.5	0.05
+GEO	drerio	GSE61186	GPL14664	-	ID	SEQUENCE	2	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	simple	0.05	1.5	0.01
+GEO	drerio	GSE77148	GPL21361	-	ID	SEQUENCE	1	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	ZnSO4-control,ZnO-control	0.05	1.5	0.01
+GEO	drerio	GSE50718	GPL14664	-	ID	SEQUENCE	1	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	pvp-control,Ag50nm-control,Ag150nm-control,AgNO3_20ppb-control	0.05	1.5	0.01
+GEO	drerio	GSE41333	GPL14688	-	NAME	SEQUENCE	2	./genomicDB/Danio_rerio.GRCz10.cdna.all.fa	simple	0.05	1.5	0.01
+custom	celegans	nerc	-	./output/platforms/celegans_G2519F-020186.txt	ProbeID	Sequence	1	./genomicDB/Caenorhabditis_elegans.WBcel235.cdna.all.fa	PVP12-control,PVP52-control,MUA12-control,AUT12-control,Unf38-control,AgNO3-control,PVP12-AgNO3,PVP12-PVP52,((PVP12+AUT12)/2)-MUA12,PVP12-MUA12,AUT12-MUA12	0.05	1.5	0.01
+AE	creinhardtii	E-MTAB-2454	E-MEXP-2384	./output/platforms/A-MEXP-2384.adf.txt	Reporter Name	Reporter Sequence	1	./genomicDB/Creinhardtii_281_v5.5.cds.fa	CeNO3-control,PVP-control,CeNPHi-control,CeNPLo-control	0.05	1.5	0.01
+GEO	creinhradtii	GSE48677	GPL13913	./output/platforms/GPL13913_family.soft	ID	SEQUENCE	1	./genomicDB/Creinhardtii_281_v5.5.cds.fa	-	0.05	1.5	0.01
+
