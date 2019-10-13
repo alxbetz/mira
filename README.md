@@ -1,17 +1,27 @@
 # MiRa
+Microarray Reanalysis is an R package that enables the re-analysis of microarray datasets in the Gene Expression Omnibus(GEO) using up-to-date transcriptome annotations.
 
 ## Installation
 
+### Requirements
+
+* MacOS 10.13.6+ or any flavor of Linux
+* R version 3.6.0+
+* bowtie 1.2.2+
+
+
+
 ### Dependencies
 
-This packages requires the ungapped short sequence aligner bowtie. You can either install bowtie manually from sourcefourge:
+This packages requires the ungapped short sequence aligner bowtie for microarray tag re-alignment. You can either install bowtie manually from sourcefourge:
+
 http://bowtie-bio.sourceforge.net/index.shtml
 
 Or install it via bioconda:
 
 https://bioconda.github.io/recipes/bowtie/README.html
 
-### From github
+### Mira package installation
 
 ```R
 install.packages("devtools")
@@ -19,18 +29,24 @@ library(devtools)
 install_github("alxbetz/mira")
 ```
 
-## Preparation
+## Usage
 
-1. We need to set up the folder structure for the pipeline:
+These instructions require familiarity with the GEO database structure. If you are unfamiliar, please check their overview:
+
+https://www.ncbi.nlm.nih.gov/geo/info/overview.html
+
+### Preparation
+
+1. First, we need to set up the folder structure for the pipeline:
 ```R
 pipeline_path = '/path/to/pipeline'
 mira::setup_folders(pipeline_path)
 ```
 This will set up folders for the input, output and the reference transcriptomes.
 
-For each GEO series, we need to assign the sample filenames to the corresponding experimental groups. Therefore, create a folder for each series in '/path/to/pipeline/input' and then create a tab-separated file  '/path/to/pipeline/input/GSEXXXXX/annotation.tsv' that has 2 columns:
+For each GEO series that we want to analyze, we need to assign the sample filenames to the corresponding experimental groups. Therefore, create a folder for each series in '/path/to/pipeline/input' and then create a tab-separated file  '/path/to/pipeline/input/GSEXXXXX/annotation.tsv' that has 2 columns:
 
-groups | file
+group | file
 -----|-----
 control | a1.txt.gz
 control | a2.txt.gz
@@ -53,7 +69,7 @@ http://plants.ensembl.org/index.html
 and save them into
 '/path/to/pipeline/genomicDB'
 
-4.Create the job submission file where all input files and parameters for the run are defined. This is again a tab-separated file with the following columns:
+4.Create the job submission file where all input files and parameters for the run are defined and save it as '/path/to/pipeline/runfile.tsv'. This is again a tab-separated file with the following columns:
 
 
 field | values | description
@@ -64,13 +80,24 @@ eid| string | GEO series id
 platformID| string | GEO platform id. '-' if the platform file needs to be specified manually, because the GEO platform file does not have a sequence column.
 platformFile| string | location of platform file with probe_id and sequence columns '/path/to/pipeline/output/platforms/platformFileName.txt'
 probeIdColName| string | exact column name of the microarray probe id columns
-probeSeqColName| exact column name of the microarray sequence
+probeSeqColName| string | exact column name of the microarray sequence
 channelCount| [1,2] | indicates whether it is a dual or single channel microarray
 cDNAFile| string | file location of the ensembl transcriptome
 contrastString| string | all contrasts to be tested by limma and fcros separated by ',' e.g 'treatment1-control,treatment2-control'. These must correspond the the groups you assigned in the first step.
 pvalDE| double]0-1] | adjusted p-value cutoff to determine which genes are differentially expressed
 lfcDE| double]0-inf] | log2 fold change cutoff to determine which genes are differentially expressed
 
+### Job submission
+```R
+jobDef = read_tsv(file.path(pipeline_path,'runfile.tsv'))
+#to run a single dataset
+singleResult  = mira::mira(jobDef[1,],pipedir=pipeline_path)
+
+#to run all datasets in the job definition file
+multiResult = apply(jobDef,1,mira::mira,pipedir=pipeline_path)
+```
+
+# Trouble shooting
 
 #### Manual installation of dependencies
 

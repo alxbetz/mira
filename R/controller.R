@@ -1,4 +1,21 @@
 
+#' MIcroarray Re-Analysis
+#'
+#' @param x
+#' @param pipedir
+#' @param pipeComponents
+#' @param summarizeFunction
+#' @param treatDualChannelAsSingleChannel
+#' @param controlColor
+#' @param verbose
+#' @param forceAnnotation
+#' @param summarizeToGeneLevel
+#' @param deMethod
+#'
+#' @return
+#' @export
+#'
+#' @examples
 mira = function(x,
                 pipedir,
                 pipeComponents='ande',
@@ -74,6 +91,10 @@ mira = function(x,
   }
 
   if(treatDualChannelAsSingleChannel) {
+    groupStrings = data.frame(trt=unique(annotation$Group),ctrl=paste0(unique(annotation$Group),"_control"))
+    contrastList = apply(groupStrings,1,function(x) paste(x['trt'],x['ctrl'],sep="-"))
+    x[['contrastString']] = Reduce(function(x,y) { paste(x,y,sep=",")},contrastList)
+
     annotation = annotationDualToSingleChannel(annotation,controlColor=controlColor)
 
   } #else {
@@ -113,19 +134,30 @@ mira = function(x,
 
     }
 
+
+
     if(grepl("d",pipeComponents)) {
+
       if(!exists('normSumEset')) {
         normSumEset = read.table(file.path(wdir, paste(x[['eid']],"meanNormWithin.txt",sep="_")),quote = "")
       }
-      if(summarizeToGeneLevel==TRUE && grepl("\\.",colnames(normSumEset)[1]))
+
+      if(summarizeToGeneLevel==TRUE)
       {
         normSumEset=summarizeTranscripts(normSumEset)
       }
-
-      dtTable = diffExpression(x,normSumEset,annotation,wdir)
-      if(verbose) {
-        print(head(dtTable))
+      if(deMethod == 'limma') {
+        dtTable = diffExpression(x,normSumEset,annotation,wdir)
+        if(verbose) {
+          print(head(dtTable))
+        }
+      } else if(deMethod == 'fcros') {
+        fcResList = fcrosWrapper(x,normSumEset,annotation,controlColor,TRUE)
+      } else {
+        stop("invalid deMethod parameter, use one of ('limma,'fcros)")
       }
+
+
       #write.csv(summary.diffE,file=file.path(wdir, paste("diffE_",experimentID,".csv",sep="")))
     }
 
@@ -138,14 +170,20 @@ mira = function(x,
         print("Contrast is")
         print(contrast)
       }
-      annoObjFname = paste(x[['eid']],"t2go.Robj",sep="_")
+      browser()
+      annoObjFname = paste(x[['eid']],"t2go.rds",sep="_")
       if(file.exists(annoObjFname) && forceAnnotation == FALSE) {
-        load(annoObjFname)
+        transcript2GO = readRDS(annoObjFname)
       } else {
         transcript2GO= loadAnnotation((x[['species']]))
-        save('transcript2GO',file=annoObjFname)
+        saveRDS(transcript2GO,file=annoObjFname)
       }
-      ha = rownames(dtTable) %in% names(transcript2GO)
+      if(deMethod =='limma') {
+        ha = rownames(dtTable) %in% names(transcript2GO)
+      } else if(deMethod =='fcros') {
+        ha = fcResList[[1]]$idnames %in% names(transcript2GO)
+      }
+
       fa = sum(ha) / length(ha)
 
       if(verbose) {
@@ -153,21 +191,33 @@ mira = function(x,
         print(fa)
       }
 
-      if(fa < 0.6) {
+      if(fa < 0.1) {
         print(head(rownames(dtTable)))
         print(head(names(transcript2GO)))
-        stop("IDspace of diffExp Table and annotation not compatible")
+        stop("IDspace of differential Expression Table and annotation not compatible")
+      }
+      if(deMethod == "limma") {
+        resList = goEnrichment(dtTable,transcript2GO,nTopNodes=20,verbose=verbose)
+      } else if(deMethod == 'fcros') {
+        resList = fcrosGoEnrichmentWrapper(x,fcResList,transcript2GO,nTopNodes=100,verbose=F)
       }
 
-      resList = goEnrichment(dtTable,transcript2GO,nTopNodes=20,verbose=verbose)
       if(is.null(resList)) {
-        print(paste("No DE genes found for ",x[['eid']],". Stopping Analysis",sep=""))
+        stop(paste0("No DE genes found for ",x[['eid']],". Stopping Analysis"))
       }
-      lapply(seq_along(resList),writeEnrichment,resList=resList,wdir=wdir)
+
+      if(deMethod == "limma") {
+        lapply(seq_along(resList),writeEnrichment,resList=resList,wdir=wdir,deMethod=deMethod)
+      } else if(deMethod == 'fcros') {
+        saveRDS(resList,file = file.path(wdir,paste0(deMethod,"_goe.rds")))
+      }
+
     }
 
   }
 
+
+  list(eMatrix = normSumEset,enrichment=resList)
 
 }
 #Summarize
@@ -186,4 +236,21 @@ mira = function(x,
 # optional: save intermediate results of step
 # optional: load intermediate results
 
+
+#' setup_folders
+#' set up pipeline folders
+#'
+#' @param pipepath
+#' path to pipeline folder
+#'
+#' @return
+#' @export
+#'
+#' @examples
+setup_folders = function(pipepath) {
+  dir.create(file.path(pipepath,'input'))
+  dir.create(file.path(pipepath,'output'))
+  dir.create(file.path(pipepath,'genomicDB'))
+  dir.create(file.path(pipepath,'platforms'))
+}
 
