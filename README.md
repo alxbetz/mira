@@ -1,6 +1,9 @@
-#MiRa
-##Installation
-###Dependencies
+# MiRa
+
+## Installation
+
+### Dependencies
+
 This packages requires the ungapped short sequence aligner bowtie. You can either install bowtie manually from sourcefourge:
 http://bowtie-bio.sourceforge.net/index.shtml
 
@@ -8,7 +11,8 @@ Or install it via bioconda:
 
 https://bioconda.github.io/recipes/bowtie/README.html
 
-###From github
+### From github
+
 ```R
 install.packages("devtools")
 library(devtools)
@@ -16,7 +20,8 @@ install_github("alxbetz/mira")
 ```
 
 ##Preparation
-First, we need to set up the folder structure for the pipeline:
+
+1. We need to set up the folder structure for the pipeline:
 ```R
 pipeline_path = '/path/to/pipeline'
 mira::setup_folders(pipeline_path)
