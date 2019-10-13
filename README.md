@@ -9,8 +9,6 @@ Microarray Reanalysis is an R package that enables the re-analysis of microarray
 * R version 3.6.0+
 * bowtie 1.2.2+
 
-
-
 ### Dependencies
 
 This packages requires the ungapped short sequence aligner bowtie for microarray tag re-alignment. You can either install bowtie manually from sourcefourge:
@@ -69,7 +67,7 @@ http://plants.ensembl.org/index.html
 and save them into
 '/path/to/pipeline/genomicDB'
 
-4.Create the job submission file where all input files and parameters for the run are defined and save it as '/path/to/pipeline/runfile.tsv'. This is again a tab-separated file with the following columns:
+4. Create the job submission file where all input files and parameters for the run are defined and save it as '/path/to/pipeline/runfile.tsv'. This is again a tab-separated file with the following columns:
 
 
 field | values | description
