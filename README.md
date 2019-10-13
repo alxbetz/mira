@@ -19,7 +19,7 @@ library(devtools)
 install_github("alxbetz/mira")
 ```
 
-##Preparation
+## Preparation
 
 1. We need to set up the folder structure for the pipeline:
 ```R
@@ -29,16 +29,17 @@ mira::setup_folders(pipeline_path)
 This will set up folders for the input, output and the reference transcriptomes.
 
 For each GEO series, we need to assign the sample filenames to the corresponding experimental groups. Therefore, create a folder for each series in '/path/to/pipeline/input' and then create a tab-separated file  '/path/to/pipeline/input/GSEXXXXX/annotation.tsv' that has 2 columns:
-groups  | file
+
+groups | file
 control | a1.txt.gz
 control | a2.txt.gz
 control | a3.txt.gz
 treatment1 | b1.txt.gz
 treatment1 | b2.txt.gz
 treatment1 | b3.txt.gz
-treatment2  | c1.txt.gz
-treatment2  | c2.txt.gz
-treatment2  | c3.txt.gz
+treatment2 | c1.txt.gz
+treatment2 | c2.txt.gz
+treatment2 | c3.txt.gz
   
 where group is the experimental group and file must correspond to the filename in the series supplement file GSEXXXX_RAW.tar.
 
@@ -75,20 +76,22 @@ lfcDE| double]0-inf] | log2 fold change cutoff to determine which genes are diff
 The R package dependencies should be installed automatically. 
 If there are problems with the automatic dependency installation from the package, you can install them manually:
 Bioconductor packages:
-*ArrayExpress
-*GEOquery
-*Rbowtie
-*Biostrings
-*limma
-*biomaRt
-*topGO
+
+* ArrayExpress
+* GEOquery
+* Rbowtie
+* Biostrings
+* limma
+* biomaRt
+* topGO
 
 CRAN packages
-*tibble
-*dplyr
-*ggplot2
-*fcros
-*tidyr
+
+* tibble
+* dplyr
+* ggplot2
+* fcros
+* tidyr
 
 
 
