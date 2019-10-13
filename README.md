@@ -31,6 +31,7 @@ This will set up folders for the input, output and the reference transcriptomes.
 For each GEO series, we need to assign the sample filenames to the corresponding experimental groups. Therefore, create a folder for each series in '/path/to/pipeline/input' and then create a tab-separated file  '/path/to/pipeline/input/GSEXXXXX/annotation.tsv' that has 2 columns:
 
 groups | file
+-----|-----
 control | a1.txt.gz
 control | a2.txt.gz
 control | a3.txt.gz
@@ -45,8 +46,7 @@ where group is the experimental group and file must correspond to the filename i
 
 2. Check if the microarray platform definition file in the GEO platform entry has a column for probe ids and a column for probe sequences and note the exact column names. If there are no probe sequences in the platform definition file, you need to check the microarray manufacturer website and save the file to the folder '/path/to/pipeline/platforms/'.
 
-3.
-Download the reference transcriptomes 
+3. Download the reference transcriptomes 
 from Ensembl.
 http://www.ensembl.org/index.html
 http://plants.ensembl.org/index.html
@@ -72,9 +72,11 @@ pvalDE| double]0-1] | adjusted p-value cutoff to determine which genes are diffe
 lfcDE| double]0-inf] | log2 fold change cutoff to determine which genes are differentially expressed
 
 
-####Manual installation of dependencies
+#### Manual installation of dependencies
+
 The R package dependencies should be installed automatically. 
 If there are problems with the automatic dependency installation from the package, you can install them manually:
+
 Bioconductor packages:
 
 * ArrayExpress
