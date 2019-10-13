@@ -82,8 +82,8 @@ probeSeqColName| string | exact column name of the microarray sequence
 channelCount| [1,2] | indicates whether it is a dual or single channel microarray
 cDNAFile| string | file location of the ensembl transcriptome
 contrastString| string | all contrasts to be tested by limma and fcros separated by ',' e.g 'treatment1-control,treatment2-control'. These must correspond the the groups you assigned in the first step.
-pvalDE| double]0-1] | adjusted p-value cutoff to determine which genes are differentially expressed
-lfcDE| double]0-inf] | log2 fold change cutoff to determine which genes are differentially expressed
+pvalDE| double ]0-1] | adjusted p-value cutoff to determine which genes are differentially expressed
+lfcDE| double ]0-inf] | log2 fold change cutoff to determine which genes are differentially expressed
 
 ### Job submission
 ```R
