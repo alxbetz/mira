@@ -5,7 +5,7 @@ Microarray Reanalysis is an R package that enables the re-analysis of microarray
 
 ### Requirements
 
-* MacOS 10.13.6+ or any flavor of Linux
+* MacOS 10.13.6+ or any flavor of Linux with Kernel version 4.4+
 * R version 3.6.0+
 * bowtie 1.2.2+
 
